@@ -1,207 +1,147 @@
 # Recoil Control Gold (RCS Gold)
 
-## English
+![Version](https://img.shields.io/badge/Version-2.0-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Made with Lua](https://img.shields.io/badge/Made%20with-Lua-blue.svg?logo=lua)
 
-The **Recoil Control Gold (RCS Gold)** is an enhanced version of a recoil control script, designed to help players stabilize their shooting in games with greater accuracy and effectiveness. Through custom adjustments and predefined modes, the script provides more precise and flexible recoil control, optimizing the gaming experience.
+Um script Lua avançado e otimizado para o Logitech G HUB, projetado para oferecer controle de recuo vertical e horizontal em jogos.
+
+---
+
+### Language Navigation
+[English](#english) • [Português](#português)
+
+---
+
+<a name="english"></a>
+## 🇬🇧 English
+
+The **Recoil Control Gold (RCS Gold)** is an advanced script designed to help players stabilize both vertical and horizontal recoil in games. Through a clean and centralized configuration table, the script provides effective and easy-to-configure recoil control.
 
 ### Features
 
-- **Recoil Control (RCS) Enabled/Disabled**: The script allows you to enable or disable recoil control as needed.
-- **Predefined Modes**: Five recoil control modes with different intensities, plus a fully customizable mode.
-- **Custom Horizontal and Vertical Force**: Allows you to adjust recoil control strength both vertically and horizontally.
-- **Customizable Horizontal Direction**: You can set whether the recoil control will be applied to the left or to the right.
-- **Customizable Activation Key**: The recoil control functionality can be toggled with a key of your choice, such as CapsLock, NumLock, or ScrollLock.
-- **Adjustable Delay Rate**: The speed of recoil control application can be adjusted (milliseconds between adjustments).
+-   **RCS Enabled/Disabled**: Easily enable or disable the entire recoil control system.
+-   **Centralized Mode Table**: Features predefined modes with different vertical and horizontal intensities, all easily customizable in one place.
+-   **Horizontal & Vertical Force**: Adjust recoil control strength both vertically and horizontally for each mode.
+-   **Customizable Activation Key**: Toggle the functionality with a key of your choice (`CapsLock`, `NumLock`, or `ScrollLock`).
+-   **Adjustable Delay**: The delay between each recoil adjustment can be configured for each mode.
 
-### Settings
+### Getting Started
 
-The script comes with several configurable variables to personalize the recoil control behavior. Below are the main variables:
+#### Prerequisites
 
-#### Configurable Variables
+-   A compatible Logitech G series mouse or keyboard.
+-   The **Logitech G HUB** software installed.
 
-- **EnableRCS (default: true)**: Defines whether recoil control is enabled or disabled.
-- **RecoilControlMode (default: "1")**: Defines the recoil control mode, where you can choose from the following modes:
-  - `"1"`: Soft recoil control.
-  - `"2"`: Strong recoil control.
-  - `"3"`: Light recoil control.
-  - `"4"`: Very aggressive recoil control.
-  - `"5"`: Extremely strong recoil control.
-  - `"0"`: Custom mode, where you define the control strength values.
-- **RcCustomStrengthX (default: 2)**: Horizontal force (left or right). Set to 0 to disable horizontal recoil control.
-- **RcCustomStrengthY (default: 7)**: Vertical force (downwards).
-- **HorizontalDirection (default: "Left")**: Defines the direction of horizontal recoil. The options are "Left" or "Right".
-- **RequireToggle (default: true)**: If `true`, the recoil control needs to be manually toggled on/off. If `false`, the control will always be active.
-- **ToggleKey (default: "CapsLock")**: Defines which key will toggle the recoil control (CapsLock, NumLock, or ScrollLock).
-- **DelayRate (default: 7)**: Defines the delay between recoil control adjustments (in milliseconds).
+#### Installation
 
-#### Predefined Modes and Settings
-
-- **Mode 1**:
-
-  - **RcCustomStrengthX** = 1
-  - **RcCustomStrengthY** = 8
-  - **HorizontalDirection** = "Right"
-
-- **Mode 2**:
-
-  - **RcCustomStrengthX** = 11.5
-  - **RcCustomStrengthY** = 11.5
-  - **HorizontalDirection** = "Right"
-
-- **Mode 3**:
-
-  - **RcCustomStrengthX** = 3.0
-  - **RcCustomStrengthY** = 3.0
-  - **HorizontalDirection** = "Left"
-
-- **Mode 4**:
-
-  - **RcCustomStrengthX** = 12.0
-  - **RcCustomStrengthY** = 12.0
-  - **HorizontalDirection** = "Right"
-
-- **Mode 5**:
-
-  - **RcCustomStrengthX** = 31.5
-  - **RcCustomStrengthY** = 31.5
-  - **HorizontalDirection** = "Left"
-
-- **Mode 0 (Custom)**:
-  - Define the values of **RcCustomStrengthX** and **RcCustomStrengthY** according to your needs.
-
-### Installation
-
-1. Download or clone this repository.
-2. Open the script in an editor of your choice (e.g., Notepad++).
-3. Load the script into the macro software you use (e.g., Logitech G Hub, Razer Synapse, etc.).
+1.  Copy the full script code.
+2.  Open Logitech G HUB and navigate to "Profiles".
+3.  Select the game profile where you want to use the script.
+4.  Click the "Scripting" icon.
+5.  Create a new Lua script and paste the copied code, replacing any existing content.
+6.  Save the script. It will become active when you use that game profile.
 
 ### How to Use
 
-1. **Start the script**: Open the script and configure the desired recoil control mode.
-2. **Activate recoil control**: Press the configured key (CapsLock, NumLock, or ScrollLock) to toggle recoil control on or off.
-3. **Aim and shoot**: Press the right mouse button to aim and the left mouse button to shoot.
-4. **Automatic mouse adjustment**: The script will automatically adjust the mouse movement to control the recoil while the left mouse button is held down.
+1.  **Configure**: Before starting, choose your desired mode by changing the `currentMode` variable inside the script. You can also edit any value in the `recoil_configs` table.
+2.  **Activate**: If `RequireToggle` is `true`, press the configured `ToggleKey` (e.g., CapsLock) to turn the system on. An LED on your keyboard should indicate if it's active.
+3.  **Aim and Shoot**: Press the right mouse button to aim and the left mouse button to shoot. The script will automatically control the recoil.
 
-### Example of How to Adjust Settings
+### Configuration
 
-#### Setting a Predefined Mode
+The script's behavior is controlled by a few main variables and a central configuration table.
 
-If you want to use **Mode 2** (stronger recoil control), just adjust the setting to:
+#### Primary Settings
+
+These variables are at the top of the script file.
+
+-   `EnableRCS` (default: `true`): Defines whether recoil control is enabled (`true`) or disabled (`false`).
+-   `currentMode` (default: `"1"`): Defines the active recoil mode. **To change modes, you must edit this value.**
+-   `RequireToggle` (default: `true`): If `true`, the script needs to be manually toggled on/off. If `false`, it will always be active.
+-   `ToggleKey` (default: `"CapsLock"`): Defines which key toggles the script.
+
+#### Recoil Patterns Table (`recoil_configs`)
+
+This table holds the settings for each mode.
+
+-   **StrengthX**: The horizontal force. **Negative values move left, positive values move right.** Set to `0` for no horizontal movement.
+-   **StrengthY**: The vertical force (downwards movement).
+-   **Delay**: The time in milliseconds between each mouse movement adjustment.
 
 ```lua
-RecoilControlMode = "2" -- Mode 2
+recoil_configs = {
+    ["1"] = { StrengthX = 1,    StrengthY = 8,    Delay = 7 },
+    ["2"] = { StrengthX = 11.5, StrengthY = 11.5, Delay = 7 },
+    ["3"] = { StrengthX = -3.0, StrengthY = 3.0,  Delay = 7 },
+    ["4"] = { StrengthX = 12.0, StrengthY = 12.0, Delay = 7 },
+    ["5"] = { StrengthX = -31.5,StrengthY = 31.5, Delay = 7 },
+    ["0"] = { StrengthX = -2,   StrengthY = 7,    Delay = 7 }
+}
 ```
+<a name="português"></a>
+## 🇧🇷 Português
 
-### Custom Configuration
-
-If you want to configure fully custom recoil control, set Mode 0 and adjust the forces as needed:
-
-```lua
-RecoilControlMode = "0" -- Custom
-RcCustomStrengthX = 5 -- Custom horizontal force
-RcCustomStrengthY = 10 -- Custom vertical force
-HorizontalDirection = "Left" -- Horizontal recoil direction
-```
-
-# Português
-
-O **Recoil Control Gold (RCS Gold)** é uma versão aprimorada de um script de controle de recuo, projetado para ajudar os jogadores a estabilizar o disparo em jogos com maior precisão e eficácia. Através de ajustes personalizados e modos predefinidos, o script proporciona um controle mais preciso e flexível do recuo, otimizando a experiência de jogo.
+O **Recoil Control Gold (RCS Gold)** é um script avançado projetado para ajudar jogadores a estabilizar o recuo vertical e horizontal em jogos. Através de uma tabela de configuração limpa e centralizada, o script fornece um controle de recuo eficaz e fácil de configurar.
 
 ### Características
 
-- **Controle de Recuo (RCS) Ativado/Desativado**: O script permite ativar ou desativar o controle de recuo conforme a necessidade.
-- **Modos Predefinidos**: Cinco modos de controle de recuo com diferentes intensidades, além de um modo totalmente personalizado.
-- **Força Horizontal e Vertical Personalizada**: Permite ajustar a força do controle de recuo, tanto na direção vertical quanto horizontal.
-- **Direção Horizontal Customizável**: O usuário pode definir se o controle de recuo será aplicado para a esquerda ou para a direita.
-- **Tecla de Ativação Personalizável**: A funcionalidade de controle de recuo pode ser ativada ou desativada com uma tecla de sua escolha, como CapsLock, NumLock ou ScrollLock.
-- **Taxa de Delay Ajustável**: A velocidade de aplicação do controle de recuo pode ser ajustada (milissegundos entre os ajustes).
+-   **RCS Ativado/Desativado**: Permite ativar ou desativar todo o sistema de controle de recuo facilmente.
+-   **Tabela de Modos Centralizada**: Possui modos predefinidos com diferentes intensidades verticais e horizontais, todos facilmente personalizáveis em um único lugar.
+-   **Força Horizontal e Vertical**: Permite ajustar a força do controle de recuo, tanto na vertical quanto na horizontal, para cada modo.
+-   **Tecla de Ativação Personalizável**: A funcionalidade pode ser ativada ou desativada com uma tecla de sua escolha (`CapsLock`, `NumLock` ou `ScrollLock`).
+-   **Delay Ajustável**: O atraso entre cada ajuste de recuo pode ser configurado para cada modo.
 
-### Configurações
+### Como Começar
 
-O script vem com várias variáveis configuráveis que permitem personalizar o comportamento do controle de recuo. Abaixo estão as variáveis principais:
+#### Pré-requisitos
 
-#### Variáveis Configuráveis
+-   Um mouse ou teclado compatível da série G da Logitech.
+-   O software **Logitech G HUB** instalado.
 
-- **EnableRCS (default: true)**: Define se o controle de recuo estará ativado ou desativado.
-- **RecoilControlMode (default: "1")**: Define o modo de controle de recuo, onde você pode escolher entre os seguintes modos:
-  - `"1"`: Controle de recuo suave.
-  - `"2"`: Controle de recuo forte.
-  - `"3"`: Controle de recuo leve.
-  - `"4"`: Controle de recuo muito agressivo.
-  - `"5"`: Controle de recuo extremamente forte.
-  - `"0"`: Modo personalizado, onde você define os valores de força de controle.
-- **RcCustomStrengthX (default: 2)**: Força horizontal (para a esquerda ou direita). Para desativar o controle horizontal, defina o valor como 0.
-- **RcCustomStrengthY (default: 7)**: Força vertical (para baixo).
-- **HorizontalDirection (default: "Left")**: Define a direção do recuo horizontal. As opções são "Left" (esquerda) ou "Right" (direita).
-- **RequireToggle (default: true)**: Se `true`, o controle de recuo precisa ser ativado/desativado manualmente. Se `false`, o controle estará sempre ativo.
-- **ToggleKey (default: "CapsLock")**: Define qual tecla será usada para ativar ou desativar o controle de recuo (CapsLock, NumLock ou ScrollLock).
-- **DelayRate (default: 7)**: Define o tempo de delay entre as mudanças do controle de recuo (em milissegundos).
+#### Instalação
 
-#### Modos Predefinidos e Configurações
-
-- **Modo 1**:
-
-  - **RcCustomStrengthX** = 1
-  - **RcCustomStrengthY** = 8
-  - **HorizontalDirection** = "Right"
-
-- **Modo 2**:
-
-  - **RcCustomStrengthX** = 11.5
-  - **RcCustomStrengthY** = 11.5
-  - **HorizontalDirection** = "Right"
-
-- **Modo 3**:
-
-  - **RcCustomStrengthX** = 3.0
-  - **RcCustomStrengthY** = 3.0
-  - **HorizontalDirection** = "Left"
-
-- **Modo 4**:
-
-  - **RcCustomStrengthX** = 12.0
-  - **RcCustomStrengthY** = 12.0
-  - **HorizontalDirection** = "Right"
-
-- **Modo 5**:
-
-  - **RcCustomStrengthX** = 31.5
-  - **RcCustomStrengthY** = 31.5
-  - **HorizontalDirection** = "Left"
-
-- **Modo 0 (Personalizado)**:
-  - Defina os valores de **RcCustomStrengthX** e **RcCustomStrengthY** conforme suas necessidades.
-
-### Instalação
-
-1. Baixe ou clone este repositório.
-2. Abra o script em um editor de sua escolha (como Notepad++)..
-3. Carregue o script no software de macro que você utiliza (ex: Logitech G Hub, Razer Synapse, etc.).
+1.  Copie o código completo do script.
+2.  Abra o Logitech G HUB e navegue até "Perfis".
+3.  Selecione o perfil de jogo onde deseja usar o script.
+4.  Clique no ícone de "Script".
+5.  Crie um novo script Lua e cole o código copiado, substituindo qualquer conteúdo existente.
+6.  Salve o script. Ele ficará ativo quando você usar esse perfil de jogo.
 
 ### Como Usar
 
-1. **Inicie o script**: Abra o script e configure o modo de controle de recuo desejado.
-2. **Ative o controle de recuo**: Pressione a tecla configurada (CapsLock, NumLock ou ScrollLock) para ativar ou desativar o controle de recuo.
-3. **Mire e atire**: Pressione o botão direito do mouse para mirar e o botão esquerdo para disparar.
-4. **Ajuste automático do mouse**: O script ajustará automaticamente o movimento do mouse para controlar o recuo enquanto o botão esquerdo do mouse estiver pressionado.
+1.  **Configure**: Antes de iniciar, escolha o modo desejado alterando a variável `currentMode` dentro do script. Você também pode editar qualquer valor na tabela `recoil_configs`.
+2.  **Ative**: Se `RequireToggle` for `true`, pressione a `ToggleKey` configurada (ex: CapsLock) para ligar o sistema. Um LED no seu teclado deve indicar se está ativo.
+3.  **Mire e Atire**: Pressione o botão direito do mouse para mirar e o esquerdo para atirar. O script controlará automaticamente o recuo.
 
-### Exemplo de Como Ajustar as Configurações
+### Configuração
 
-#### Configuração de um Modo Predefinido
+O comportamento do script é controlado por algumas variáveis principais e uma tabela de configuração central.
 
-Se você deseja usar o **Modo 2** (controle mais forte de recuo), basta ajustar a configuração para:
+#### Configurações Primárias
+
+Essas variáveis ficam no topo do arquivo do script.
+
+-   `EnableRCS` (padrão: `true`): Define se o controle de recuo está ativado (`true`) ou desativado (`false`).
+-   `currentMode` (padrão: `"1"`): Define o modo de recuo ativo. **Para trocar de modo, você deve editar este valor.**
+-   `RequireToggle` (padrão: `true`): Se `true`, o script precisa ser ativado/desativado manualmente. Se `false`, estará sempre ativo.
+-   `ToggleKey` (padrão: `"CapsLock"`): Define qual tecla ativa e desativa o script.
+
+#### Tabela de Padrões de Recuo (`recoil_configs`)
+
+Esta tabela contém as configurações para cada modo.
+
+-   **StrengthX**: A força horizontal. **Valores negativos movem para a esquerda, valores positivos para a direita.** Defina como `0` para não ter movimento horizontal.
+-   **StrengthY**: A força vertical (movimento para baixo).
+-   **Delay**: O tempo em milissegundos entre cada ajuste de movimento do mouse.
 
 ```lua
-RecoilControlMode = "2" -- Modo 2
-```
-
-#### Configuração Personalizada
-
-Se você quiser configurar um controle de recuo totalmente personalizado, defina o Modo 0 e ajuste as forças conforme necessário:
-
-```lua
-RecoilControlMode = "0" -- Personalizado
-RcCustomStrengthX = 5 -- Força horizontal personalizada
-RcCustomStrengthY = 10 -- Força vertical personalizada
-HorizontalDirection = "Left" -- Direção do recuo horizontal
+recoil_configs = {
+    ["1"] = { StrengthX = 1,    StrengthY = 8,    Delay = 7 },
+    ["2"] = { StrengthX = 11.5, StrengthY = 11.5, Delay = 7 },
+    ["3"] = { StrengthX = -3.0, StrengthY = 3.0,  Delay = 7 },
+    ["4"] = { StrengthX = 12.0, StrengthY = 12.0, Delay = 7 },
+    ["5"] = { StrengthX = -31.5,StrengthY = 31.5, Delay = 7 },
+    ["0"] = { StrengthX = -2,   StrengthY = 7,    Delay = 7 }
+}
 ```
