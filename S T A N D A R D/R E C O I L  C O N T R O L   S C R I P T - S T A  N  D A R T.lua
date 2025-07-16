@@ -1,33 +1,21 @@
 --- RECOIL CONTROL STANDARD ---
 
 EnableRCS = true -- False - Disabled True - Enabled
-
-RecoilControlMode = "1" -- Modes: "1", "2", "3", "4", "5", "0 - custom"
-
-RcCustomStrengthY = 7 -- Vertical force (downwards)
-
+currentMode = "1" -- Modes: "1", "2", "3", "4", "5", "0 - custom"
 RequireToggle = true -- Set to false if it should always be active.
-
 ToggleKey = "CapsLock" -- Toggle keys: "CapsLock", "NumLock", "ScrollLock"
 
-DelayRate = 7 -- Time between changes in milliseconds
-
-
 -- Saved Settings
-if RecoilControlMode == "1" then
-    RcCustomStrengthY = 8
-elseif RecoilControlMode == "2" then
-    RcCustomStrengthY = 11.5
-elseif RecoilControlMode == "3" then
-    RcCustomStrengthY = 3.0
-elseif RecoilControlMode == "4" then
-    RcCustomStrengthY = 12.0
-elseif RecoilControlMode == "5" then
-    RcCustomStrengthY = 31.5
-elseif RecoilControlMode == "0" then
-    -- Custom settings already defined above
-end
-
+-- StrengthY = Vertical force (downwards)
+-- Delay = Time between changes in milliseconds
+local recoil_configs = {
+    ["1"] = { StrengthY = 8,    Delay = 7 },
+    ["2"] = { StrengthY = 11.5, Delay = 7 },
+    ["3"] = { StrengthY = 3.0,  Delay = 7 },
+    ["4"] = { StrengthY = 12.0, Delay = 7 },
+    ["5"] = { StrengthY = 31.5, Delay = 7 },
+    ["0"] = { StrengthY = 7,    Delay = 7 }
+}
 
 -- Script
 EnablePrimaryMouseButtonEvents(true)
@@ -45,15 +33,21 @@ function OnEvent(event, arg)
 end
 
 function handleRecoil()
+    local config = recoil_configs[currentMode]
+    if not config then
+        return
+    end
+
     if IsMouseButtonPressed(3) then -- Right mouse button to aim
         repeat
             if IsMouseButtonPressed(1) then -- Left mouse button to shoot
                 repeat
-                    local moveY = RcCustomStrengthY
+                    local moveY = config.StrengthY
                     MoveMouseRelative(0, roundToInteger(moveY)) -- No horizontal movement, only vertical
-                    Sleep(DelayRate)
+                    Sleep(config.Delay)
                 until not IsMouseButtonPressed(1)
             end
+            Sleep(1)
         until not IsMouseButtonPressed(3)
     end
 end
